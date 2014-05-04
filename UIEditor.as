@@ -256,6 +256,7 @@ class UIEditorDisplay extends Sprite {
 		_txtInfo = UIEditor.createTextField("", -2, 0, null, 100, 20, this, null, "", false, null, [new GlowFilter(0x1d1812, 1, 2, 2, 5)]);
 		_txtName = UIEditor.createTextField("", -2, 0, null, 100, 20, this, null, "", true, null, [new GlowFilter(0x1d1812, 1, 2, 2, 5)]);
 		_txtName.autoSize = _txtInfo.autoSize = TextFieldAutoSize.LEFT;
+		_txtInfo.mouseEnabled = _txtName.mouseEnabled = false;
 	}
 
 	public function setStage(s:Stage):void {
@@ -486,6 +487,7 @@ class UIEditorDisplay extends Sprite {
 				startFlex();
 				break;
 			case Z:
+				onUp();
 				_target.x = _rx;
 				_target.y = _ry;
 				_target.width = _rw;
@@ -531,6 +533,7 @@ class UIEditorDisplay extends Sprite {
 	private function onWheel(event:MouseEvent):void {
 		event.stopImmediatePropagation();
 		var d:int = event.delta;
+		d = d / (Math.abs(d));
 		if (_isKeyShift) {
 			d = d * 5;
 		}
@@ -554,7 +557,7 @@ class UIEditorDisplay extends Sprite {
 		_stage.addEventListener(MouseEvent.MOUSE_MOVE, onMove);
 	}
 
-	protected function onUp(event:MouseEvent):void {
+	protected function onUp(event:MouseEvent = null):void {
 		_isDown = false;
 		_stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMove);
 	}
