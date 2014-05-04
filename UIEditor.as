@@ -323,6 +323,7 @@ class UIEditorDisplay extends Sprite {
 		_s.graphics.drawRect(0, 0, t.width, t.height);
 		_s.graphics.endFill();
 		_s.addEventListener(MouseEvent.CLICK, onClick);
+		_txtName.mouseEnabled = false;
 		var p:Point = t.localToGlobal(new Point());
 		this.x = p.x;
 		this.y = p.y;
@@ -331,6 +332,7 @@ class UIEditorDisplay extends Sprite {
 
 	private function onClick(event:MouseEvent):void {
 		_s.removeEventListener(MouseEvent.CLICK, onClick);
+		_txtName.mouseEnabled = true;
 		if (_showTxt == _target && _showTxt != null) {
 			UIEditor.getInstance().doStartOrStop();
 			return;
